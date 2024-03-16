@@ -8,7 +8,7 @@ pip install transformers
 pip install addict
 pip install yapf
 pip install timm
-pip install logru
+pip install loguru
 pip install tqdm
 pip install scikit-image
 pip install scikit-learn

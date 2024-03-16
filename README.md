@@ -46,7 +46,7 @@ sh install.sh
 #### Download MVTec-AD dataset
 * Follow instructions in https://www.mvtec.com/company/research/datasets/mvtec-ad/
 
-#### Download MVTec-AD dataset
+#### Download Visa dataset
 * Follow instructions in https://paperswithcode.com/dataset/visa
 
 ## Run run_winclip.py to reproduce the implementation results
