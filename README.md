@@ -53,6 +53,13 @@ sh install.sh
 ```
 python run_winclip.py
 ```
+## Inference on a folder of images
+You can apply WinCLIP to a directory of images using `infer_folder.py`.
+```bash
+python infer_folder.py --image-dir <folder> --class-name <category>
+```
+This will save anomaly visualizations to `./results`.
+
 
 ## Results
 
