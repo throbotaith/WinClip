@@ -53,4 +53,4 @@ def get_dataloader_from_args(phase, **kwargs):
 
     debug_str = f"===> datasets: {kwargs['dataset']}, class name/len: {kwargs['class_name']}/{len(dataset_inst)}, batch size: {kwargs['batch_size']}"
     logger.info(debug_str)
-    return data_loader, dataset_inst
+

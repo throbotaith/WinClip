@@ -5,9 +5,7 @@ import random
 
 custom_classes = ["custom"]
 
-# By default the custom dataset is expected under the repository's
-# `datasets/custom` directory as described in docs/custom_dataset.md.
-CUSTOM_DIR = os.path.join(os.path.dirname(__file__), "custom")
+
 
 
 def _load_from_dir(folder, label):
