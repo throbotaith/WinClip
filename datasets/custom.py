@@ -5,7 +5,6 @@ import random
 
 custom_classes = ["custom"]
 
-CUSTOM_DIR = "../datasets/custom"
 
 
 def _load_from_dir(folder, label):

@@ -37,6 +37,12 @@ def get_dataloader_from_args(phase, **kwargs):
         experiment_indx=kwargs['experiment_indx']
     )
 
+    if len(dataset_inst) == 0:
+        logger.warning(
+            f"No samples found for dataset {kwargs['dataset']} class {kwargs['class_name']} ({phase})."
+        )
+        return None, dataset_inst
+
     if phase == 'train':
         data_loader = DataLoader(dataset_inst, batch_size=kwargs['batch_size'], shuffle=True,
                                   num_workers=0)
@@ -47,5 +53,4 @@ def get_dataloader_from_args(phase, **kwargs):
 
     debug_str = f"===> datasets: {kwargs['dataset']}, class name/len: {kwargs['class_name']}/{len(dataset_inst)}, batch size: {kwargs['batch_size']}"
     logger.info(debug_str)
-
     return data_loader, dataset_inst
