@@ -4,6 +4,7 @@ from sklearn.metrics import auc
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
+from loguru import logger
 
 def calculate_max_f1(gt, scores):
     precision, recall, thresholds = precision_recall_curve(gt, scores)
@@ -16,21 +17,35 @@ def calculate_max_f1(gt, scores):
     return max_f1, threshold
 
 def metric_cal(scores, gt_list, gt_mask_list, cal_pro=False):
-    # calculate image-level ROC AUC score
+    """Calculate evaluation metrics handling single-class edge cases."""
+
     img_scores = scores.reshape(scores.shape[0], -1).max(axis=1)
     gt_list = np.asarray(gt_list, dtype=int)
-    fpr, tpr, _ = roc_curve(gt_list, img_scores)
-    img_roc_auc = roc_auc_score(gt_list, img_scores)
-    # print('INFO: image ROCAUC: %.3f' % (img_roc_auc))
 
-    img_f1, img_threshold = calculate_max_f1(gt_list, img_scores)
+    if len(np.unique(gt_list)) < 2:
+        logger.warning(
+            "Only one class present in y_true. ROC AUC is undefined; returning 0."
+        )
+        img_roc_auc = 0.0
+        img_f1 = 0.0
+    else:
+        fpr, tpr, _ = roc_curve(gt_list, img_scores)
+        img_roc_auc = roc_auc_score(gt_list, img_scores)
+        img_f1, img_threshold = calculate_max_f1(gt_list, img_scores)
 
     gt_mask = np.asarray(gt_mask_list, dtype=int)
-    pxl_f1, pxl_threshold = calculate_max_f1(gt_mask.flatten(), scores.flatten())
-
-    # calculate per-pixel level ROCAUC
-    fpr, tpr, _ = roc_curve(gt_mask.flatten(), scores.flatten())
-    per_pixel_rocauc = roc_auc_score(gt_mask.flatten(), scores.flatten())
+    if len(np.unique(gt_mask)) < 2:
+        logger.warning(
+            "Only one class present in pixel ground truth. Pixel ROC AUC is undefined; returning 0."
+        )
+        pxl_f1 = 0.0
+        per_pixel_rocauc = 0.0
+    else:
+        pxl_f1, pxl_threshold = calculate_max_f1(
+            gt_mask.flatten(), scores.flatten()
+        )
+        fpr, tpr, _ = roc_curve(gt_mask.flatten(), scores.flatten())
+        per_pixel_rocauc = roc_auc_score(gt_mask.flatten(), scores.flatten())
 
     if cal_pro:
         pro_auc_score = cal_pro_metric(gt_mask_list, scores, fpr_thresh=0.3)

@@ -7,6 +7,7 @@ custom_classes = ["custom"]
 
 
 
+
 def _load_from_dir(folder, label):
     """Load images from a directory.
 
