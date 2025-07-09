@@ -60,6 +60,20 @@ python infer_folder.py --image-dir <folder> --class-name <category>
 ```
 This will save anomaly visualizations to `./results`.
 
+## Training on your own dataset
+If you have a small collection such as 20 normal images and 300 abnormal images,
+place them under `datasets/custom` as described in [docs/custom_dataset.md](docs/custom_dataset.md).
+You can then build the feature gallery by running:
+
+```bash
+python eval_WinCLIP.py \
+  --dataset custom \
+  --class-name custom \
+  --k-shot 20
+```
+
+This performs evaluation using the images in `datasets/custom/test/anomaly`.
+
 
 ## Results
 
@@ -103,5 +117,4 @@ This will save anomaly visualizations to `./results`.
 | pipe_fryum | 69.70    | 75.40   | 80.70    | 12.30    | 82.80             | 93.65   | 83.48    | 22.45    |
 | Average    | 78.06    | 79.59   | 78.99    | 14.82    | 64.26             | 70.01   | 74.23    | 9.50     |
 
-## Acknowledgements
-This project borrows some code from [OpenCLip](https://github.com/mlfoundations/open_clip) and [CDO](https://github.com/caoyunkang/CDO), thanks for their admiring contributions~!
+## AcknowledgementsThis project borrows some code from [OpenCLip](https://github.com/mlfoundations/open_clip) and [CDO](https://github.com/caoyunkang/CDO), thanks for their admiring contributions~!
