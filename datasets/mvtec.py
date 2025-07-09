@@ -41,7 +41,7 @@ def load_mvtec(category, k_shot, experiment_indx):
         return img_tot_paths, gt_tot_paths, tot_labels, tot_types
 
     assert category in mvtec_classes
-    assert k_shot in [0, 1, 5, 10]
+    assert k_shot >= 0
     assert experiment_indx in [0, 1, 2]
 
     test_img_path = os.path.join(MVTEC2D_DIR, category, 'test')

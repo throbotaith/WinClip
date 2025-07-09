@@ -93,6 +93,8 @@ def main(args):
     # get the train dataloader
     if kwargs['k_shot'] > 0:
         train_dataloader, train_dataset_inst = get_dataloader_from_args(phase='train', perturbed=False, **kwargs)
+        if train_dataloader is None:
+            logger.warning('Training dataset is empty. Proceeding without feature gallery.')
     else:
         train_dataloader, train_dataset_inst = None, None
 
