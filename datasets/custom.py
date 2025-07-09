@@ -2,6 +2,9 @@ import glob
 import os
 import random
 
+# Base directory for custom dataset
+CUSTOM_DIR = os.path.join(os.path.dirname(__file__), "custom")
+
 
 custom_classes = ["custom"]
 
