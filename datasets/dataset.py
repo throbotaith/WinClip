@@ -12,7 +12,7 @@ class CLIPDataset(Dataset):
         self.load_function = load_function
         self.phase = phase
 
-        assert k_shot in [0, 1, 5, 10]
+        assert k_shot >= 0
         assert experiment_indx in [0, 1, 2]
 
         self.category = category
