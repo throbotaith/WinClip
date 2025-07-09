@@ -60,6 +60,20 @@ python infer_folder.py --image-dir <folder> --class-name <category>
 ```
 This will save anomaly visualizations to `./results`.
 
+## Training on your own dataset
+If you have a small collection such as 20 normal images and 300 abnormal images,
+place them under `datasets/custom` as described in [docs/custom_dataset.md](docs/custom_dataset.md).
+You can then build the feature gallery by running:
+
+```bash
+python eval_WinCLIP.py \
+  --dataset custom \
+  --class-name custom \
+  --k-shot 20
+```
+
+This performs evaluation using the images in `datasets/custom/test/anomaly`.
+
 
 ## Results
 

@@ -5,6 +5,7 @@ from loguru import logger
 from .dataset import CLIPDataset
 from .mvtec import load_mvtec, mvtec_classes
 from .visa import load_visa, visa_classes
+from .custom import load_custom, custom_classes
 
 
 mean_train = [0.48145466, 0.4578275, 0.40821073]
@@ -13,13 +14,13 @@ std_train = [0.26862954, 0.26130258, 0.27577711]
 load_function_dict = {
     'mvtec': load_mvtec,
     'visa': load_visa,
-
-
+    'custom': load_custom,
 }
 
 dataset_classes = {
     'mvtec': mvtec_classes,
     'visa': visa_classes,
+    'custom': custom_classes,
 }
 
 def denormalization(x):
